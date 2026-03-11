@@ -1,0 +1,380 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: rgba(255,255,255,0.95);
+  overflow: hidden;
+}
+
+/* ================= WIDGET ================= */
+
+#widget {
+  width: 900px;
+  padding: 14px;
+  border-radius: 18px;
+
+  background: rgba(20,20,25,0.80);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+
+  display: flex;
+  gap: 14px;
+}
+
+/* ================= MAIN COLUMN ================= */
+
+#mainCol {
+  width: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= PLAYLIST COLUMN ================= */
+
+#playlistCol {
+  flex: 1;
+  min-width: 340px;
+
+  border-radius: 16px;
+  padding: 12px;
+
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.25);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  overflow: hidden;
+}
+
+#playlistHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#playlistTitle {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+#playlistMeta {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+#playlistList {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Playlist items */
+
+.playItem {
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+
+  transition: background 0.2s ease;
+}
+
+.playItem:hover {
+  background: rgba(255,255,255,0.14);
+}
+
+.playItem.current {
+  background: rgba(255,255,255,0.20);
+}
+
+#playlistEmpty {
+  font-size: 13px;
+  opacity: 0.75;
+  line-height: 1.4;
+  padding: 12px;
+}
+
+/* ================= TOP BAR ================= */
+
+#topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  /* ✅ Drag window from top bar */
+  -webkit-app-region: drag;
+}
+
+#appTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.appIcon {
+  font-size: 18px;
+}
+
+/* ✅ Buttons must remain clickable */
+#topActions,
+#topActions button {
+  -webkit-app-region: no-drag;
+}
+
+.iconBtn {
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.iconBtn:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+/* Also keep all controls + playlist clickable (not dragging) */
+#controls button,
+#playlistCol, #playlistCol * ,
+#modal, #modal * {
+  -webkit-app-region: no-drag;
+}
+
+/* ================= STATUS ================= */
+
+#statusWrap {
+  margin: 6px 0 10px;
+}
+
+#status {
+  font-size: 13px;
+}
+
+#nowPlaying {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+/* ================= PROGRESS ================= */
+
+/* ✅ Hide weird grey line until session starts */
+#progressWrap {
+  display: none;
+}
+
+#progressTrack {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.7);
+  transition: width 200ms ease;
+}
+
+/* ================= CONTROLS ================= */
+
+#controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.primaryBtn, .secondaryBtn, .chipBtn {
+  border-radius: 12px;
+  padding: 12px 12px;
+  font-weight: 800;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+  min-height: 44px;
+  font-size: 14px;
+}
+
+.primaryBtn {
+  background: rgba(255,255,255,0.20);
+}
+
+.secondaryBtn {
+  background: rgba(255,255,255,0.10);
+}
+
+#inputRow, #playerRow {
+  display: flex;
+  gap: 12px;
+}
+
+.chipBtn {
+  flex: 1;
+  background: rgba(255,255,255,0.10);
+}
+
+.chipBtn:hover {
+  background: rgba(255,255,255,0.16);
+}
+
+/* ================= PAST TRANSITIONS ================= */
+
+#pastSection {
+  margin-bottom: 6px;
+}
+
+#pastHeader {
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+#pastRow {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+#pastRow::-webkit-scrollbar {
+  height: 6px;
+}
+
+#pastRow::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+
+.pastCard {
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 0 0 140px;
+  height: 110px;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.15),
+    rgba(0,0,0,0.40)
+  );
+
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.pastCard:hover {
+  transform: scale(1.05);
+}
+
+.pastTitle {
+  font-weight: 700;
+  font-size: 12px; 
+}
+
+.pastSub {
+  font-size: 10.5px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+/* ================= MODAL ================= */
+
+#modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(6px);
+  padding: 16px;
+}
+
+#modalPanel {
+  width: 380px;
+  margin: 40px auto;
+  border-radius: 16px;
+  background: rgba(22,22,28,0.95);
+  border: 1px solid rgba(255,255,255,0.10);
+  overflow: hidden;
+}
+
+#modalHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+#modalBody {
+  padding: 12px;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 3px solid rgba(255,255,255,0.25);
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+/* ===== Modal inputs: keep old small white side-by-side look ===== */
+#modalContent input,
+#modalContent textarea {
+  font-size: 14px;
+  padding: 10px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: white;
+  color: black;
+  outline: none;
+}
+
+/* Text modal two inputs in one row (like before) */
+#curMood, #desMood {
+  display: inline-block;
+  width: calc(50% - 6px);
+  vertical-align: top;
+  margin-top: 6px;
+}
+
+/* gap between the two boxes */
+#desMood { margin-left: 12px; }
+
+/* optional: nicer focus */
+#modalContent input:focus,
+#modalContent textarea:focus {
+  border-color: rgba(255,255,255,0.55);
+}
+/* Make Past Transitions area tighter */
+#pastSection { margin-bottom: 2px; }
+#pastHeader { margin-bottom: 6px; }
+
+#pastRow { gap: 10px; padding-bottom: 2px; }
+
+
+
+
+
+

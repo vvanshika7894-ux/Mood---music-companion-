@@ -1,0 +1,43 @@
+{
+  "name": "fypimplementation",
+  "version": "1.0.0",
+  "description": "Mood Music Companion Widget",
+  "main": "main.js",
+  "author": "vvans",
+  "license": "ISC",
+  "type": "commonjs",
+
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+
+  "devDependencies": {
+    "electron": "^28.2.0",
+    "electron-builder": "^24.0.0"
+  },
+
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.6.2",
+    "python-shell": "^5.0.0"
+  },
+
+  "build": {
+  "appId": "com.moodmusic.widget",
+  "productName": "Mood Music Companion",
+  "mac": {
+    "target": "dmg",
+    "category": "public.app-category.music"
+  },
+  "asar": true,
+  "asarUnpack": [
+    "ai/**",
+    ".venv/**"
+  ],
+  "files": [
+    "**/*"
+  ]
+}
+    
+  }

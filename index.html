@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mood Music Companion</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="widget">
+
+    <div id="mainCol">
+
+      <!-- Top Bar -->
+      <div id="topBar">
+        <div id="appTitle">
+          <span class="appIcon">🎧</span>
+          <span>Mood Music Companion</span>
+        </div>
+
+        <div id="topActions">
+          <button id="logoutBtn" class="iconBtn" title="Logout">⎋</button>
+          <button id="settingsBtn" class="iconBtn" title="Settings">⚙</button>
+          <button id="closeBtn" class="iconBtn" title="Close">✕</button>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div id="statusWrap">
+        <div id="status"></div>
+        <div id="nowPlaying"></div>
+      </div>
+
+      <!-- Progress -->
+      <div id="progressWrap">
+        <div id="progressTrack">
+          <div id="progressBar"></div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div id="controls">
+
+        <!-- 🔥 Past Transitions Section -->
+        <div id="pastSection">
+          <div id="pastHeader">Past Transitions</div>
+          <div id="pastRow"></div>
+        </div>
+
+        <!-- Session Buttons -->
+        <button id="startSessionBtn" class="primaryBtn">
+          Start Session
+        </button>
+
+        <button id="stopSessionBtn" class="secondaryBtn" disabled>
+          Stop Session
+        </button>
+
+        <div id="inputRow">
+          <button id="textBtn" class="chipBtn" disabled>Text</button>
+          <button id="voiceBtn" class="chipBtn" disabled>Voice</button>
+          <button id="videoBtn" class="chipBtn" disabled>Video</button>
+        </div>
+
+        <div id="playerRow">
+          <button id="backBtn" class="chipBtn" disabled>◀</button>
+          <button id="playPauseBtn" class="chipBtn" disabled>⏯</button>
+          <button id="nextBtn" class="chipBtn" disabled>▶</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Playlist Column -->
+    <div id="playlistCol">
+      <div id="playlistHeader">
+        <div id="playlistTitle">Playlist</div>
+        <div id="playlistMeta"></div>
+      </div>
+      <div id="playlistList"></div>
+    </div>
+
+  </div>
+
+  <!-- Modal -->
+  <div id="modal">
+    <div id="modalPanel">
+      <div id="modalHeader">
+        <div id="modalTitle"></div>
+        <button id="modalClose" class="iconBtn">✕</button>
+      </div>
+      <div id="modalBody">
+        <div id="modalLoader">
+          <div class="spinner"></div>
+          <div id="modalLoaderMsg">Please wait…</div>
+        </div>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+dist/
+temp.webm
