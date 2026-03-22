@@ -1,5 +1,4 @@
 def analyze_video(frame_path):
-    # Lazy import so DeepFace doesn't download/init unless video is used
     from deepface import DeepFace
 
     result = DeepFace.analyze(

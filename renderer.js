@@ -869,7 +869,6 @@ function audiusStreamUrl(base, trackId) {
 }
 
 async function fetchAudiusTracks(query) {
-  // (Renderer fetch works for you already; keeping same)
   const resNode = await httpRequest("https://api.audius.co");
   const nodeJson = await resNode.json();
   const base = nodeJson.data?.[0];
@@ -1101,7 +1100,6 @@ async function ensureQueueAndPlaylist(token) {
   renderPlaylist();
 }
 
-/* ✅ IMPORTANT: if queue already has tracks (loaded from DB), do NOT rebuild */
 async function playNextFromQueue(token) {
   if (!state.active || !isTokenLive(token)) return;
 
@@ -1281,7 +1279,6 @@ async function askContinueOrStop(token) {
 async function startPlaybackFromExactTracks(curText, desText, tracks) {
   const token = state.sessionToken;
 
-  // analyze mood for VA/progress UI (but NO provider rebuild)
   setStatus("Analyzing mood…");
   const curOut = await analyzeMood({ text: curText });
   const desOut = await analyzeMood({ text: desText });
@@ -1334,7 +1331,6 @@ async function startPlaybackFromExactTracks(curText, desText, tracks) {
 async function startNewPlaybackFlowAfterMood(curOut, desOut, curText, desText) {
   let transitionId = null;
 
-  // ✅ save transition, get transitionId
   if (currentUser) {
     const resp = await ipcRenderer.invoke("save-transition", {
       currentMood: curText,
@@ -1386,7 +1382,6 @@ async function startNewPlaybackFlowAfterMood(curOut, desOut, curText, desText) {
   await ensureQueueAndPlaylist(token);
   if (!state.active || !isTokenLive(token)) return;
 
-  // ✅ save exact tracks for replay
   if (currentUser && transitionId) {
     const tracksToSave = state.playlist.slice(0, 20).map((t) => ({
       source: t.source,
@@ -1453,7 +1448,6 @@ async function loadPastTransitions() {
       </div>
     `;
 
-    // ✅ Click = replay exact tracks saved for this transition
     card.onclick = async () => {
       if (!currentUser) return;
 
@@ -1795,53 +1789,68 @@ function openVideoModal() {
   const RECORD_MAX_MS = 10000;
 
   openModal(
-    "Video Input",
-  `
-    <div style="font-size:13px;opacity:0.85;margin-bottom:12px;">
-      You’ll see a live preview. Tap the red button to record.
-    </div>
+  "Video Input",
+`
+<div style="font-size:13px;opacity:0.85;margin-bottom:12px;">
+  You’ll see a live preview. Tap the red button to record.
+</div>
 
-    <div style="
-      position:relative;
+<div style="
+  position:relative;
+  width:100%;
+  max-height:320px;
+  border-radius:16px;
+  overflow:hidden;
+  background:black;
+">
+  <video id="liveCam"
+    autoplay
+    playsinline
+    muted
+    style="
       width:100%;
-      max-height:320px;
-      border-radius:16px;
-      overflow:hidden;
-      background:black;
+      height:320px;
+      object-fit:cover;
     ">
-      <video id="liveCam"
-        autoplay
-        playsinline
-        muted
-        style="
-          width:100%;
-          height:320px;
-          object-fit:cover;
-        ">
-      </video>
+  </video>
 
-      <button id="recCircle"
-        style="
-          position:absolute;
-          bottom:16px;
-          left:50%;
-          transform:translateX(-50%);
-          width:64px;
-          height:64px;
-          border-radius:50%;
-          border:none;
-          background:#ff3b30;
-          box-shadow:0 0 20px rgba(255,0,0,0.6);
-          cursor:pointer;
-        ">
-      </button>
-    </div>
+  <button id="recCircle"
+    style="
+      position:absolute;
+      bottom:16px;
+      left:50%;
+      transform:translateX(-50%);
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      border:none;
+      background:#ff3b30;
+      box-shadow:0 0 20px rgba(255,0,0,0.6);
+      cursor:pointer;
+    ">
+  </button>
 
-    <div id="vidErr"
-         style="color:#ffb3b3;font-size:12px;min-height:16px;margin-top:12px;">
-    </div>
-  `
-  );
+  <div id="recTimer"
+    style="
+      position:absolute;
+      top:10px;
+      left:10px;
+      background:rgba(0,0,0,0.6);
+      color:white;
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:6px;
+    ">
+    00:00
+  </div>
+
+</div>
+
+<div id="vidErr"
+     style="color:#ffb3b3;font-size:12px;min-height:16px;margin-top:12px;">
+</div>
+`
+);
 
   const liveCam = document.getElementById("liveCam");
   const recBtn = document.getElementById("recCircle");
@@ -1910,7 +1919,7 @@ function openVideoModal() {
       mediaRecorder = mt ? new MediaRecorder(stream, { mimeType: mt }) : new MediaRecorder(stream);
     } catch (e) {
       try {
-        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder = new MediaRecorder(stream, { mimeType: "video/webm" });
       } catch (e2) {
         err.textContent = `MediaRecorder not supported: ${e2?.message || e2}`;
         stopStream();

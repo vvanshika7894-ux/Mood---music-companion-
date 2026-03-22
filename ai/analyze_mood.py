@@ -4,8 +4,6 @@ import os
 import warnings
 
 warnings.filterwarnings("ignore")
-
-# Silence common noisy libs
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
@@ -74,9 +72,7 @@ def main():
         })
 
     except Exception as e:
-        # IMPORTANT: always return JSON on any unexpected crash
         safe_print({"error": f"AI crashed: {str(e)}"})
-
 
 if __name__ == "__main__":
     main()

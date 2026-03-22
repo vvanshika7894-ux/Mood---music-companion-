@@ -1,13 +1,9 @@
 const Database = require("better-sqlite3");
 const path = require("path");
 const { app } = require("electron");
-
-// Safe location
 const dbPath = path.join(app.getPath("userData"), "moodmusic.db");
-
 const db = new Database(dbPath);
 
-// Performance + reliability
 db.exec(`
 PRAGMA journal_mode = WAL;
 PRAGMA foreign_keys = ON;
@@ -23,7 +19,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 `);
 
-// 🔥 NEW: TRANSITIONS TABLE
+// NEW: TRANSITIONS TABLE
 db.exec(`
 CREATE TABLE IF NOT EXISTS transitions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

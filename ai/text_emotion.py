@@ -11,8 +11,6 @@ _load_error = None
 
 def _fallback(text: str):
     t = (text or "").lower()
-
-    # tiny heuristic fallback (keeps app usable if HF model not available)
     if any(w in t for w in ["happy", "excited", "great", "good", "amazing", "joy", "love"]):
         return {"joy": 0.8, "neutral": 0.2}
     if any(w in t for w in ["sad", "down", "depressed", "lonely", "cry", "upset"]):
@@ -35,8 +33,6 @@ def _ensure_model():
 
         hf_logging.set_verbosity_error()
         hf_logging.disable_progress_bar()
-
-        # ✅ Force CPU (-1) so Mac MPS never triggers weird logs
         _classifier = pipeline(
             "text-classification",
             model="j-hartmann/emotion-english-distilroberta-base",

@@ -1,5 +1,3 @@
-// main.js (FULL UPDATED FILE)
-
 const transitions = require("./db/transitions");
 const {
   app,
@@ -8,7 +6,7 @@ const {
   Tray,
   Menu,
   nativeImage,
-  net, // ✅ http-request (no CORS)
+  net, 
 } = require("electron");
 
 const path = require("path");
@@ -158,7 +156,6 @@ ipcMain.on("resize-window", (_e, { width, height }) => {
   } catch {}
 });
 
-// ✅ HTTP REQUEST (no CORS) for renderer.js httpRequest()
 ipcMain.handle("http-request", async (_e, { url, method = "GET", headers = {}, timeoutMs = 4500 }) => {
   return new Promise((resolve) => {
     try {
@@ -256,7 +253,6 @@ ipcMain.handle("get-last-transitions", () => {
   }
 });
 
-// ✅ save exact playlist for transition
 ipcMain.handle("save-transition-tracks", (_e, { transitionId, tracks }) => {
   if (!currentUser) return { error: "Not logged in" };
   try {
@@ -267,7 +263,6 @@ ipcMain.handle("save-transition-tracks", (_e, { transitionId, tracks }) => {
   }
 });
 
-// ✅ load exact playlist for transition
 ipcMain.handle("get-transition-tracks", (_e, { transitionId }) => {
   if (!currentUser) return [];
   try {
@@ -277,7 +272,6 @@ ipcMain.handle("get-transition-tracks", (_e, { transitionId }) => {
   }
 });
 
-// ================= AI =================
 // ================= AI =================
 function getPythonCommand() {
   if (app.isPackaged) {

@@ -147,7 +147,6 @@ html, body {
   background: rgba(255,255,255,0.18);
 }
 
-/* Also keep all controls + playlist clickable (not dragging) */
 #controls button,
 #playlistCol, #playlistCol * ,
 #modal, #modal * {
@@ -171,8 +170,6 @@ html, body {
 }
 
 /* ================= PROGRESS ================= */
-
-/* ✅ Hide weird grey line until session starts */
 #progressWrap {
   display: none;
 }
@@ -339,7 +336,6 @@ html, body {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-/* ===== Modal inputs: keep old small white side-by-side look ===== */
 #modalContent input,
 #modalContent textarea {
   font-size: 14px;
@@ -351,23 +347,18 @@ html, body {
   outline: none;
 }
 
-/* Text modal two inputs in one row (like before) */
 #curMood, #desMood {
   display: inline-block;
   width: calc(50% - 6px);
   vertical-align: top;
   margin-top: 6px;
 }
-
-/* gap between the two boxes */
 #desMood { margin-left: 12px; }
 
-/* optional: nicer focus */
 #modalContent input:focus,
 #modalContent textarea:focus {
   border-color: rgba(255,255,255,0.55);
 }
-/* Make Past Transitions area tighter */
 #pastSection { margin-bottom: 2px; }
 #pastHeader { margin-bottom: 6px; }
 
