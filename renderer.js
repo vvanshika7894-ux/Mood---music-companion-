@@ -1489,26 +1489,28 @@ async function loadPastTransitions() {
 function openAuthModal(mode = "login") {
   function renderLogin() {
     openModal(
-      "Login",
-      `
-        <input id="authUser" placeholder="Username" />
-        <input id="authPass" type="password" placeholder="Password" />
+  "Login",
+  `
+    <div class="authForm">
+      <input id="authUser" class="full" placeholder="Username" />
+      <input id="authPass" type="password" placeholder="Password" class="full"/>
+    </div>
 
-        <div id="authErr"
-             style="color:#ffb3b3;font-size:12px;min-height:16px;margin-top:6px;">
-        </div>
+    <div id="authErr"
+         style="color:#ffb3b3;font-size:12px;min-height:16px;margin-top:6px;">
+    </div>
 
-        <button id="loginBtn" style="width:100%;margin-top:10px;">
-          Login
-        </button>
+    <button id="loginBtn" class="primaryBtn authBtn">
+      Login
+    </button>
 
-        <div style="margin-top:10px;font-size:12px;text-align:center;">
-          No account?
-          <span id="goRegister"
-                style="color:#9ad;cursor:pointer;">Register</span>
-        </div>
-      `
-    );
+    <div style="margin-top:10px;font-size:12px;text-align:center;">
+      No account?
+      <span id="goRegister"
+            style="color:#9ad;cursor:pointer;">Register</span>
+    </div>
+  `
+);
 
     const err = document.getElementById("authErr");
 
@@ -1541,28 +1543,29 @@ function openAuthModal(mode = "login") {
 
   function renderRegister() {
     openModal(
-      "Register",
-      `
-        <input id="regUser" placeholder="Username" />
-        <input id="regPass" type="password" placeholder="Password" />
-        <input id="regPass2" type="password" placeholder="Retype Password" />
+  "Register",
+  `
+    <div class="authForm">
+      <input id="regUser" placeholder="Username" />
+      <input id="regPass" type="password" placeholder="Password" />
+      <input id="regPass2" class="full" type="password" placeholder="Retype Password" />
+    </div>
 
-        <div id="authErr"
-             style="color:#ffb3b3;font-size:12px;min-height:16px;margin-top:6px;">
-        </div>
+    <div id="authErr"
+         style="color:#ffb3b3;font-size:12px;min-height:16px;margin-top:6px;">
+    </div>
 
-        <button id="registerBtn" style="width:100%;margin-top:10px;">
-          Create Account
-        </button>
+    <button id="registerBtn" class="primaryBtn authBtn">
+      Create Account
+    </button>
 
-        <div style="margin-top:10px;font-size:12px;text-align:center;">
-          Already registered?
-          <span id="goLogin"
-                style="color:#9ad;cursor:pointer;">Login</span>
-        </div>
-      `
-    );
-
+    <div style="margin-top:10px;font-size:12px;text-align:center;">
+      Already registered?
+      <span id="goLogin"
+            style="color:#9ad;cursor:pointer;">Login</span>
+    </div>
+  `
+);
     const err = document.getElementById("authErr");
 
     document.getElementById("registerBtn").onclick = async () => {

@@ -347,6 +347,27 @@ html, body {
   outline: none;
 }
 
+/* ================= AUTH FORM ================= */
+
+.authForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.authForm input {
+  width: 100%;
+}
+
+.authForm .full {
+  grid-column: span 2;
+}
+
+.authBtn {
+  width: 100%;
+  margin-top: 12px;
+}
 #curMood, #desMood {
   display: inline-block;
   width: calc(50% - 6px);
