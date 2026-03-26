@@ -111,8 +111,6 @@ html, body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-
-  /* ✅ Drag window from top bar */
   -webkit-app-region: drag;
 }
 
@@ -127,8 +125,6 @@ html, body {
 .appIcon {
   font-size: 18px;
 }
-
-/* ✅ Buttons must remain clickable */
 #topActions,
 #topActions button {
   -webkit-app-region: no-drag;
